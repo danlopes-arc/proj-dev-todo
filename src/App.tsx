@@ -37,33 +37,41 @@ export const App: React.FC = () => {
     setTodos(newTodos);
   };
 
+  const onTodoDelete = (todo: Todo) => {
+    const newTodos = todos.filter((t) => t !== todo);
+    setTodos(newTodos);
+  };
+
   return (
-    <Flex direction={"column"} justifyContent="center">
+    <Flex direction="column" justifyContent="center">
       <Container maxWidth="3xl">
         <Flex direction="column" gap={4} mt={4}>
           <Heading textAlign="center">Proj Dev Todo</Heading>
           <form onSubmit={onSubmit}>
             <Flex gap={2}>
               <Input borderWidth={2} value={newTodo} onChange={onNewTodoChange} />
-              <Button type="submit" colorScheme={"blue"}>Add</Button>
+              <Button type="submit" colorScheme="blue">Add</Button>
             </Flex>
           </form>
           <Flex direction="column" gap={2}>
             {[...todos].reverse().map((todo) => (
               <Card
+                direction="row"
+                alignItems="center"
                 key={todo.id}
-                opacity={todo.completed ? 0.5 : 1}
-                backgroundColor={todo.completed ? "gray.200" : "transparent"}>
+                pr={1}>
                 <Checkbox
                   colorScheme="gray"
                   flexGrow={1}
                   checked={todo.completed}
                   onChange={() => onCompletedToggle(todo)}
+                  opacity={todo.completed ? 0.5 : 1}
                   p={2}>
                   <Text fontSize="lg" textDecoration={todo.completed ? "line-through" : "none"}>
                     {todo.text}
                   </Text>
                 </Checkbox>
+                <Button onClick={() => onTodoDelete(todo)} size="sm">Delete</Button>
               </Card>
             ))}
           </Flex>
