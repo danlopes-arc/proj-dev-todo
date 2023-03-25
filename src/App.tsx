@@ -50,7 +50,7 @@ export const App: React.FC = () => {
           <form onSubmit={onSubmit}>
             <Flex gap={2}>
               <Input borderWidth={2} value={newTodo} onChange={onNewTodoChange} />
-              <Button type="submit" colorScheme="green">Add</Button>
+              <Button type="submit" colorScheme="green">Create</Button>
             </Flex>
           </form>
           <Flex direction="column" gap={2}>
